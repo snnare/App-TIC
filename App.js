@@ -1,14 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import C01 from './src/components/C01';
 
-export default function App() {
+
+import { PaperProvider } from 'react-native-paper';
+
+
+
+export default function Main() {
   return (
+    <PaperProvider>
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <C01></C01>
     </View>
+    </PaperProvider>
   );
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {
