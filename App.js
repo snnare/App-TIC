@@ -1,19 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import C01 from './src/components/C01';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { AuthProvider } from './src/context/authContext';
+
+import HomePage from './src/screens/Home';
+import Register from './src/screens/Register';
+import Tasks from './src/screens/TaskForm'
 
 
-import { PaperProvider } from 'react-native-paper';
 
-
+const Stack = createStackNavigator();
 
 export default function Main() {
   return (
-    <PaperProvider>
-    <View style={styles.container}>
-      <C01></C01>
-    </View>
-    </PaperProvider>
+    <AuthProvider> 
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomePage} options={{ title: 'Home' }} />
+        <Stack.Screen name="Register" component={Register} options={{ title: 'Register' }} />
+      
+      </Stack.Navigator>
+    </NavigationContainer>
+    </AuthProvider>
   );
 }
 
