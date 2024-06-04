@@ -10,7 +10,7 @@ import { TaskFormPage } from './src/screens/TaskForm';
 import { LoginPage } from './src/screens/Login';
 import { ProtectedRoute } from './src/routes';
 import { TasksPage } from './src/screens/TaskPage';
-
+import RT from './src/screens/Test/RT';
 
 const Stack = createStackNavigator();
 
@@ -18,10 +18,11 @@ export default function Main() {
   return (
     <AuthProvider> 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Register">
         <Stack.Screen name="Home" component={HomePage} options={{ title: 'Home' }} />
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Register" component={Register} options={{ title: 'Register' }} />
+        <Stack.Screen name="RT" component={RT} />
         <Stack.Screen name="Protected" component={ProtectedRoute} />
         <Stack.Screen name="Tasks" component={TasksPage} />
         <Stack.Screen name="AddTask" component={TaskFormPage} />

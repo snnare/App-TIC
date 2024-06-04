@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../../context/authContext';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerSchema } from '../schemas/auth';
+import { registerSchema } from '../../schemas/auth';
 
-function Register() {
+function RT() {
   const { signup, errors: registerErrors, isAuthenticated, loading } = useAuth();
   const navigation = useNavigation();
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(registerSchema),
-  });
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (value) => {
+    console.log(value); // Muestra los datos en la consola
     await signup(value);
   };
 
@@ -42,7 +41,6 @@ function Register() {
           placeholder="Write your name"
           {...register('username')}
         />
-        {errors.username && <Text style={styles.error}>{errors.username.message}</Text>}
 
         <Text style={styles.label}>Email:</Text>
         <TextInput
@@ -50,7 +48,6 @@ function Register() {
           placeholder="youremail@domain.tld"
           {...register('email')}
         />
-        {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
         <Text style={styles.label}>Password:</Text>
         <TextInput
@@ -59,7 +56,14 @@ function Register() {
           placeholder="********"
           {...register('password')}
         />
-        {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+
+        <Text style={styles.label}>Confirm Password:</Text>
+        <TextInput
+          style={styles.input}
+          secureTextEntry
+          placeholder="********"
+          {...register('confirmPassword')}
+        />
 
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
@@ -70,7 +74,6 @@ function Register() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -107,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default RT;
